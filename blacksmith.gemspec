@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Adler Hsieh"]
   spec.email         = ["adler@hotmail.com"]
 
-  spec.summary       = %q{summary}
-  spec.description   = %q{desc}
-  spec.homepage      = "https://google.com"
+  spec.summary       = %q{A meme plugin for hipchat}
+  spec.description   = %q{It posts image according to the pattern in the room}
+  spec.homepage      = "https://github.com/adlerhsieh/blacksmith"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
