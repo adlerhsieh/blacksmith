@@ -1,13 +1,14 @@
 module Blacksmith
   class Resource
     ROOT = File.expand_path("../../../assets", __FILE__)
-    EXTENTIONS = %w(jpg png)
+    EXTENTIONS = %w(.jpg .png)
 
     def self.get(filename = nil)
       raise NoResourceError, "No filename specified" if filename.nil?
 
       EXTENTIONS.each do |ext|
-        path = "#{ROOT}/#{filename}.#{ext}"
+        ext = "" if filename[/#{ext}$/]
+        path = "#{ROOT}/#{filename}#{ext}"
         return File.new(path) if File.exist?(path)
       end
 

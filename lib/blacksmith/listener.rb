@@ -5,8 +5,12 @@ module Blacksmith
     include Robut::Plugin
 
     def handle(time, sender, message)
-      # h = Hammer.new(target_room: "chatbot_fun_lab", filename: "greg-approves")
-      # h.slam
+      Config.patterns.each do |pattern, filename|
+        if message[pattern]
+          Hammer.new(target_room: "chatbot_fun_lab", filename: filename).slam
+          return
+        end
+      end
     end
   end
 end
