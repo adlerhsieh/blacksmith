@@ -2,8 +2,8 @@ require 'hipchat'
 
 module Blacksmith
   class Hammer
-    def initialize(target_room: "chatbot_fun", url: nil)
-      @target_room = target_room
+    def initialize(url: nil)
+      @target_room = Blacksmith::Config.room
       @url = url
     end
 

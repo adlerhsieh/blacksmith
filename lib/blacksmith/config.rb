@@ -35,6 +35,14 @@ module Blacksmith
       def title=(name)
         @title = name
       end
+
+      def room
+        @room ||= ""
+      end
+
+      def room=(name)
+        @room = name
+      end
     end
   end
 

@@ -8,7 +8,7 @@ module Blacksmith
       return if message.include?("File uploaded")
       Config.patterns.each do |pattern, url|
         if message[pattern]
-          Hammer.new(target_room: "chatbot_fun", url: url).slam
+          Hammer.new(url: url).slam
           return
         end
       end
