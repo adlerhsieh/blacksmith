@@ -5,9 +5,10 @@ module Blacksmith
     include Robut::Plugin
 
     def handle(time, sender, message)
-      Config.patterns.each do |pattern, filename|
+      return if message.include?("File uploaded")
+      Config.patterns.each do |pattern, url|
         if message[pattern]
-          Hammer.new(target_room: "chatbot_fun_lab", filename: filename).slam
+          Hammer.new(target_room: "chatbot_fun_lab", url: url).slam
           return
         end
       end

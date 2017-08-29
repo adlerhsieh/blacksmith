@@ -27,6 +27,14 @@ module Blacksmith
       def patterns
         @patterns ||= {}
       end
+
+      def title
+        @title ||= ""
+      end
+
+      def title=(name)
+        @title = name
+      end
     end
   end
 
