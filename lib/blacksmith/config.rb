@@ -1,6 +1,17 @@
 module Blacksmith
   class Config
+    SERVER_URL = ENV["HIPCHAT_SERVER_URL"]
+    API_TOKEN = ENV["HIPCHAT_API_TOKEN"]
+
     class << self
+      def connection
+        @client ||= HipChat::Client.new(API_TOKEN, server_url: SERVER_URL)
+      end
+
+      def establish_connection!
+        connection
+      end
+
       def draw(&block)
         class_eval(&block)
       end

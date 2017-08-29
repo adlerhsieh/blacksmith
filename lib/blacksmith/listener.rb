@@ -11,6 +11,11 @@ module Blacksmith
           return
         end
       end
+    rescue => err
+      puts "#{err.class}: #{err.message}"
+      err.backtrace.each do |b|
+        puts b
+      end
     end
   end
 end
