@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "blacksmith/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "blacksmith"
+  spec.name          = "blacksmith-hipchat"
   spec.version       = Blacksmith::VERSION
   spec.authors       = ["Adler Hsieh"]
   spec.email         = ["adler@hotmail.com"]
