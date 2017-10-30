@@ -32,7 +32,3 @@ end
 # Optional: Add a title to the message sender
 Blacksmith::Config.title = "Memebot"
 ```
-
-An example output:
-
-![screen shot 2017-10-30 at 3 01 15 pm](https://user-images.githubusercontent.com/6851886/32154222-4ea713c2-bd83-11e7-80e1-35684a2bad78.png)
