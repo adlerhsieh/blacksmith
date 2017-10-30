@@ -13,6 +13,10 @@ gem 'blacksmith-hipchat'
 In `Chatfile`:
 
 ```ruby
+# Required variables
+ENV["HIPCHAT_SERVER_URL"] = "..."
+ENV["HIPCHAT_API_TOKEN"] = "..."
+
 # Add the plugin to the list
 Robut::Plugin.plugins << Blacksmith::Listener
 
@@ -21,16 +25,14 @@ Blacksmith::Config.room = "chatbot"
 
 # Map the Images with Regexp
 Blacksmith::Config.draw do
-  # If you want someone to approve something
-  map /approve/, to: 'http://i.imgur.com/4L8lDAl.png'
-
-  # If you want to have faith
-  map /(have|has|had) faith/, to: 'http://i.imgur.com/BGnagT3.png'
-
-  # If you want to tell some one to do it
-  map /do it/, to: 'http://i.imgur.com/4loCJ30.png'
+  # map /regexp/, to: 'image_url'
+  map /rails/, to: 'https://i.imgur.com/SAfUrEV.jpg'
 end
 
-# Optional: Add a title
+# Optional: Add a title to the message sender
 Blacksmith::Config.title = "Memebot"
 ```
+
+An example output:
+
+![screen shot 2017-10-30 at 3 01 15 pm](https://user-images.githubusercontent.com/6851886/32154222-4ea713c2-bd83-11e7-80e1-35684a2bad78.png)
