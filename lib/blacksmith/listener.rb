@@ -5,11 +5,13 @@ module Blacksmith
     include Robut::Plugin
 
     def handle(time, sender, message)
+      # Don't handle messages sent from this plugin
       return if message.include?("File uploaded")
+
       Config.patterns.each do |pattern, url|
         if message[pattern]
           Hammer.new(url: url).slam
-          return
+          break
         end
       end
     rescue => err

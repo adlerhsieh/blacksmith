@@ -1,11 +1,23 @@
 module Blacksmith
   class Config
-    SERVER_URL = ENV["HIPCHAT_SERVER_URL"]
-    API_TOKEN = ENV["HIPCHAT_API_TOKEN"]
-
     class << self
+
+      attr_accessor :title, :room, :patterns, :server_url, :api_token
+
       def connection
-        @client ||= HipChat::Client.new(API_TOKEN, server_url: SERVER_URL)
+        return @client if @client
+
+        ["room", "api_token"].each do |attr|
+          if eval(attr).nil?
+            raise ConfigError, "Missing configuration: #{attr}. Check README to setup." 
+          end
+        end
+
+        @client = if server_url
+                    HipChat::Client.new(api_token, server_url: server_url)
+                  else
+                    HipChat::Client.new(api_token)
+                  end
       end
 
       def establish_connection!
@@ -17,34 +29,17 @@ module Blacksmith
       end
 
       def map(pattern = nil, options = {})
-        raise MappingError, "No pattern is given" if pattern.nil?
+        self.patterns ||= {}
+
+        raise MappingError, "Pattern can only be a Regexp" unless pattern.is_a? Regexp
         raise MappingError, "Pattern cannot be blank" if pattern == //
-        raise MappingError, "Pattern should be a Regexp" unless pattern.is_a? Regexp
-        raise MappingError, "Missing target in mapping. Use: to: 'target'"  if options.is_a?(Hash).! || options[:to].nil?
-        patterns[pattern] = options[:to]
-      end
+        raise MappingError, "Missing target in mapping. Use: to: 'image_url'"  if options.is_a?(Hash).! || options[:to].nil?
 
-      def patterns
-        @patterns ||= {}
-      end
-
-      def title
-        @title ||= ""
-      end
-
-      def title=(name)
-        @title = name
-      end
-
-      def room
-        @room ||= ""
-      end
-
-      def room=(name)
-        @room = name
+        self.patterns[pattern] = options[:to]
       end
     end
   end
 
+  class ConfigError < StandardError; end
   class MappingError < StandardError; end
 end
